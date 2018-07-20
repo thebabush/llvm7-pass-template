@@ -1,6 +1,9 @@
-add_library(SkeletonPass MODULE
+add_llvm_loadable_module(SkeletonPass
     # List your source files here.
     Skeleton.cpp
+
+    PLUGIN_TOOL
+    opt
 )
 
 # Use C++11 to compile your pass (i.e., supply -std=c++11).

@@ -3,6 +3,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/Transforms/IPO/PassManagerBuilder.h"
+
 using namespace llvm;
 
 namespace {
@@ -19,12 +20,10 @@ namespace {
 
 char SkeletonPass::ID = 0;
 
-// Automatically enable the pass.
-// http://adriansampson.net/blog/clangpass.html
-static void registerSkeletonPass(const PassManagerBuilder &,
-                         legacy::PassManagerBase &PM) {
-  PM.add(new SkeletonPass());
-}
-static RegisterStandardPasses
-  RegisterMyPass(PassManagerBuilder::EP_EarlyAsPossible,
-                 registerSkeletonPass);
+static RegisterPass<SkeletonPass> X(
+  "skeleton",               // Command line argument
+  "Dummy Pass",             // Command line desciption
+  false,                    // Only looks at CFG
+  false                     // Analysis Pass
+);
+
