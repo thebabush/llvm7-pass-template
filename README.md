@@ -1,22 +1,27 @@
-
 ## At a glance ##
 
 A step-by-step tutorial for building an out-of-source LLVM pass based on Adrian Sampson's "LLVM for Grad Students"
 
 ## Setup ##
 
-LLVM is an umbrella project for building compilers
-and code transformation tools. We consider in this tutorial:
-- Building LLVM from source
-- Building a trivial out-of-source LLVM pass.
+LLVM is an umbrella project for building compilers and code transformation tools.
+In this tutorial we'll build a trivial out-of-source LLVM pass.
 
-We will be building LLVM v`6.0.1` which is the latest as of this writing.
-We assume that you have a working compiler toolchain (GCC or LLVM) and that CMake is installed (minimum version 3.4.3).
-We also assume that you are working un a Linux system.
+We assume the system is running Ubuntu 18.04, has a recent version of CMake and
+has a working compiler toolchain (GCC or LLVM).
+This instructions should work on other Ubuntu versions without modification,
+but that hasn't been tested by the author.
 
-With a working Internet connection, run `./setup.sh` and pray the Linux Gods
-that nothing fails.
-This will download LLVM and clang and then compile them.
+In order to install LLVM 7 without compiling it, head over to
+[apt.llvm.org](https://apt.llvm.org/) and follow the instructions to add
+LLVM's Ubuntu repository to your source list.
+
+After that:
+
+```sh
+sudo apt update
+sudo apt install clang-7
+```
 
 ## Building the Pass ##
 
@@ -30,6 +35,9 @@ Run `./test.sh`.
 
 This will compile `./test/test.c` into human-readable LLVM IR, run the pass on
 it and show the final IR.
+
+You should also see the message `I saw a function called main!` at the
+beginning of the output.
 
 ### Further resources
 
